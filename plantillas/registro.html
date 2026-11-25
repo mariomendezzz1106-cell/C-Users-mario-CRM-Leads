@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crear cuenta · CRM de Leads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='acceso.css') }}">
+</head>
+<body>
+<main>
+  <div>
+    <h1>Crear cuenta</h1>
+    <p>Se crea un espacio privado para tu empresa. Tú serás su propietario y podrás invitar a tu equipo.</p>
+  </div>
+  {% if error %}<div class="error" role="alert">{{ error }}</div>{% endif %}
+  <form method="post" action="{{ url_for('auth.registro_post') }}">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Nombre de la empresa<input name="empresa" value="{{ valores.empresa or '' }}" maxlength="120" required autofocus></label>
+    <label>Tu nombre<input name="nombre" value="{{ valores.nombre or '' }}" autocomplete="name" maxlength="120" required></label>
+    <label>Email<input name="email" type="email" value="{{ valores.email or '' }}" autocomplete="username" required></label>
+    <label>Contraseña (mínimo 10 caracteres)<input name="clave" type="password" autocomplete="new-password" minlength="10" required></label>
+    <label>Repite la contraseña<input name="clave2" type="password" autocomplete="new-password" minlength="10" required></label>
+    <label class="check"><input type="checkbox" name="demo" value="1"> Cargar 30 leads de ejemplo (ficticios, solo los verá tu empresa)</label>
+    <button type="submit">Crear cuenta</button>
+  </form>
+  <p>¿Ya tienes cuenta? <a href="{{ url_for('auth.login') }}">Inicia sesión</a></p>
+</main>
+</body>
+</html>

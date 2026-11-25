@@ -1,0 +1,483 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel de Leads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Una sola columna: resumen por clase (filtros), conclusión y lista de leads; la ficha se abre en un diálogo.
+   El mismo archivo funciona de dos formas: con los datos incrustados (solo lectura) o servido por app.py (lee y guarda). */
+:root{
+  --bg:#F6F7F9; --surface:#FFFFFF; --fg:#111827; --muted:#4B5563; --line:#D1D5DB; --accent:#1D4ED8;
+  --hot:#B42318; --warm:#8A5300; --cold:#1D5A96; --rev:#5B3FC4; --ok:#166534;
+  --f:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F141B; --surface:#18202B; --fg:#F3F4F6; --muted:#B6BECB; --line:#364152; --accent:#8AB4FF;
+  --hot:#FF9A85; --warm:#F5C25B; --cold:#8CC4F5; --rev:#C2B2FF; --ok:#86EFAC; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F141B; --surface:#18202B; --fg:#F3F4F6; --muted:#B6BECB; --line:#364152; --accent:#8AB4FF;
+  --hot:#FF9A85; --warm:#F5C25B; --cold:#8CC4F5; --rev:#C2B2FF; --ok:#86EFAC; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:17px/1.6 var(--f)}
+.wrap{max-width:1080px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+h1,h2,h3{margin:0;line-height:1.25;text-wrap:balance}
+h1{font-size:2rem}
+h2{font-size:1.35rem}
+h3{font-size:1.05rem}
+p{margin:0}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:6px;z-index:5}
+.skip:focus{left:max(16px,env(safe-area-inset-left,0px))}
+
+/* resumen */
+.resumen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.clase{font:inherit;color:inherit;text-align:left;cursor:pointer;background:var(--surface);border:2px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.clase:hover{border-color:var(--c)}
+.clase[aria-pressed="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
+.clase .nombre{font-weight:700;color:var(--c)}
+.clase .n{font-size:2.2rem;font-weight:700;line-height:1.1}
+.clase .que{font-size:.95rem;color:var(--muted)}
+.clase .sel{font-size:.85rem;font-weight:700;color:var(--c)}
+
+.caja{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:12px;min-width:0}
+.caja p{max-width:68ch}
+details summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details ul{margin:8px 0 0;padding-left:22px;display:grid;gap:6px}
+
+/* lista */
+.barra{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.campo{display:grid;gap:4px;flex:1;min-width:220px}
+.campo label{font-weight:700;font-size:.95rem}
+input[type="search"]{font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.btn{font:inherit;font-weight:700;cursor:pointer;padding:9px 16px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);text-decoration:none;display:inline-block}
+.btn:hover{background:var(--fg);color:var(--surface)}
+.btn.prim{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.prim:hover{filter:brightness(1.1)}
+.btn.peligro{border-color:var(--hot);color:var(--hot)}
+.btn.peligro:hover{background:var(--hot);color:var(--surface)}
+#estado{font-size:.95rem;color:var(--muted)}
+
+.wrap>*{min-width:0}
+.tabla{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+caption{text-align:left;padding-bottom:8px;color:var(--muted);font-size:.95rem}
+th{text-align:left;font-size:.9rem;color:var(--muted);padding:10px;border-bottom:2px solid var(--line)}
+td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+td .emp{font-weight:700;display:block}
+td .sub{font-size:.9rem;color:var(--muted)}
+.etq{display:inline-block;font-weight:700;font-size:.85rem;padding:2px 10px;border-radius:999px;border:2px solid var(--c);color:var(--c);white-space:nowrap}
+.prio{font-weight:700}
+.vacio{text-align:center;padding:28px;color:var(--muted)}
+
+/* ficha */
+dialog{width:min(640px,calc(100% - 32px));max-height:calc(100% - 32px);border:1px solid var(--line);border-radius:12px;padding:0;background:var(--surface);color:var(--fg)}
+dialog::backdrop{background:rgba(17,24,39,.55)}
+.ficha{padding:22px;display:grid;gap:18px;overflow-wrap:anywhere}
+.ficha header{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.nota{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.nota .grande{font-size:2.4rem;font-weight:700;line-height:1}
+.aviso{border:2px solid var(--rev);border-radius:8px;padding:12px 14px}
+.aviso ul,.ficha ul{margin:6px 0 0;padding-left:22px;display:grid;gap:4px}
+.desglose{display:grid;gap:8px}
+.fila{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center}
+.fila .b{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.fila .b span{display:block;height:100%;background:var(--accent)}
+.correo{border:1px solid var(--line);border-radius:8px}
+.correo .asunto{padding:10px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.correo pre{margin:0;padding:14px;white-space:pre-wrap;font:inherit}
+.correo .pie{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+.datos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin:0}
+.datos dt{font-size:.85rem;color:var(--muted)}
+.datos dd{margin:0;overflow-wrap:anywhere}
+
+/* modo plataforma (servido por app.py) */
+.herramientas{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.herramientas .grupo{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seguimiento{border:2px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:10px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}
+.form label,.seguimiento label{display:grid;gap:4px;font-weight:700;font-size:.92rem}
+.form .ancho{grid-column:1/-1}
+.form input,.form select,.form textarea,.seguimiento select,.seguimiento textarea,.usuarios input,.usuarios select,#fichero{font:inherit;font-weight:400;padding:8px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg);width:100%}
+textarea{min-height:76px;resize:vertical}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.msg{font-weight:700}
+.msg.err{color:var(--hot)}
+.msg.ok{color:var(--ok)}
+.historial{font-size:.9rem;color:var(--muted)}
+.lista-usuarios{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.lista-usuarios li{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:8px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--surface);padding:10px 18px;border-radius:8px;font-weight:700;z-index:30}
+
+@media (max-width:820px){.resumen{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){
+  thead{position:absolute;left:-9999px}
+  table,tbody,tr,td{display:block}
+  tr{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:12px;padding:6px 4px}
+  td{border:0;padding:6px 12px;display:grid;grid-template-columns:110px 1fr;gap:8px}
+  td::before{content:attr(data-label);font-size:.85rem;color:var(--muted);font-weight:700}
+  .fila{grid-template-columns:110px 1fr auto}
+  .datos,.form{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<a class="skip" href="#leads">Ir a la lista de leads</a>
+<main class="wrap">
+  <header style="display:grid;gap:12px">
+    <div>
+      <h1>Panel de leads</h1>
+      <p class="muted" id="sub"></p>
+    </div>
+    <div class="herramientas" id="herramientas" hidden>
+      <div class="grupo">
+        <button type="button" class="btn prim" id="b-nuevo">Añadir lead</button>
+        <button type="button" class="btn" id="b-importar">Importar CSV o Excel</button>
+        <details style="position:relative"><summary class="btn" style="list-style:none">Descargar</summary>
+          <div style="position:absolute;z-index:4;margin-top:6px;display:grid;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;min-width:220px">
+            <a class="btn" href="/descargas/excel">Excel del plan</a>
+            <a class="btn" href="/descargas/hubspot">CSV para HubSpot</a>
+            <a class="btn" href="/descargas/informe">Informe comercial</a>
+          </div>
+        </details>
+        <button type="button" class="btn" id="b-usuarios" hidden>Usuarios</button>
+      </div>
+      <form method="post" action="/logout" class="grupo">
+        <span class="muted" id="quien"></span>
+        <button type="submit" class="btn">Salir</button>
+      </form>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-resumen">
+    <h2 id="t-resumen" style="margin-bottom:12px">Resumen por clase</h2>
+    <div class="resumen" id="resumen"></div>
+  </section>
+
+  <section class="caja" aria-labelledby="t-concl" id="conclusion">
+    <h2 id="t-concl">Conclusión</h2>
+    <div id="concl-cuerpo" style="display:grid;gap:12px"></div>
+  </section>
+
+  <section aria-labelledby="t-leads" id="leads" style="display:grid;gap:14px">
+    <h2 id="t-leads">Leads por prioridad</h2>
+    <div class="barra">
+      <div class="campo">
+        <label for="q">Buscar por empresa, contacto o sector</label>
+        <input id="q" type="search" autocomplete="off">
+      </div>
+      <button class="btn" id="todos" type="button">Ver todos</button>
+    </div>
+    <p id="estado" role="status" aria-live="polite"></p>
+    <div class="tabla">
+    <table>
+      <caption>Ordenados por prioridad y fecha límite. Pulsa «Ver ficha» para ver el detalle y el correo.</caption>
+      <thead><tr id="cabecera"></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg" aria-labelledby="d-tit"><div class="ficha" id="ficha"></div></dialog>
+<dialog id="dlg-form" aria-labelledby="f-tit"><form class="ficha" id="form-lead" novalidate></form></dialog>
+<dialog id="dlg-imp" aria-labelledby="i-tit"><form class="ficha" id="form-imp">
+  <header><h2 id="i-tit">Importar leads</h2><button type="button" class="btn" data-cerrar>Cerrar</button></header>
+  <p>Sube un CSV o Excel con las mismas columnas que <b>datos/leads.csv</b>. Cada fila se valida y se puntúa con las reglas del motor y se añade a los leads actuales.</p>
+  <label for="fichero" style="font-weight:700">Fichero</label>
+  <input id="fichero" name="fichero" type="file" accept=".csv,.xlsx,.xls" required>
+  <p class="msg" id="imp-msg" role="status" aria-live="polite"></p>
+  <div class="acciones"><button type="submit" class="btn prim">Importar</button></div>
+</form></dialog>
+<dialog id="dlg-usr" aria-labelledby="u-tit"><div class="ficha usuarios" id="usuarios"></div></dialog>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="application/json" id="datos">/*__DATOS__*/</script>
+<script>
+document.documentElement.lang = 'es';
+let D = JSON.parse(document.getElementById('datos').textContent);
+const SERVIDOR = D === null;            // servido por app.py: lee y guarda en la base de datos
+let L = [];
+const CLASES = ['HOT','WARM','COLD','REVISAR DATOS'];
+const COLOR = {'HOT':'var(--hot)','WARM':'var(--warm)','COLD':'var(--cold)','REVISAR DATOS':'var(--rev)'};
+const NOMBRE = {'HOT':'HOT','WARM':'WARM','COLD':'COLD','REVISAR DATOS':'Revisar datos'};
+const QUE = {'HOT':'Contactar esta semana','WARM':'Seguimiento con contenido de valor','COLD':'Nurturing automático','REVISAR DATOS':'Corregir datos antes de contactar'};
+const PRIO = {'P1':'P1 · Urgente','P2':'P2 · Alta','P3':'P3 · Media','P4':'P4 · Baja'};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const eur = n => (Number(n)||0).toLocaleString('es-ES',{maximumFractionDigits:0}) + ' €';
+const fecha = s => s ? new Date(s+'T12:00').toLocaleDateString('es-ES',{day:'numeric',month:'long'}) : 'Sin fecha';
+let filtro = null, texto = '';
+
+/* ── comunicación con el servidor ── */
+async function api(metodo, url, cuerpo){
+  const opciones = {method: metodo, headers: {'X-CRM':'1'}};
+  if (cuerpo instanceof FormData) opciones.body = cuerpo;
+  else if (cuerpo !== undefined) { opciones.headers['Content-Type'] = 'application/json'; opciones.body = JSON.stringify(cuerpo); }
+  const r = await fetch(url, opciones);
+  if (r.status === 401) { location.href = '/login'; throw new Error('Sesión caducada'); }
+  const datos = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(datos.error || 'No se ha podido guardar. Inténtalo de nuevo.');
+  return datos;
+}
+function avisar(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(avisar.t); avisar.t = setTimeout(() => el.hidden = true, 2600); }
+async function recargar(){
+  D = await api('GET', '/api/datos');
+  iniciar();
+}
+
+/* ── pintar ── */
+function iniciar(){
+  L = D.leads;
+  $('#sub').textContent = `${D.meta.empresa} · ${L.length} leads · datos a ${fecha(D.meta.fecha_referencia)} de ${D.meta.fecha_referencia.slice(0,4)}`;
+  if (SERVIDOR) {
+    $('#herramientas').hidden = false;
+    $('#quien').textContent = `${D.usuario.nombre}${D.usuario.rol==='admin'?' (administrador)':''}`;
+    $('#b-usuarios').hidden = D.usuario.rol !== 'admin';
+  }
+  $('#cabecera').innerHTML = ['Prioridad','Empresa','Puntuación','Clase', ...(SERVIDOR?['Estado']:[]), 'Fecha límite','Qué hacer']
+    .map(t => `<th scope="col">${t}</th>`).join('') + '<th scope="col"><span class="muted">Detalle</span></th>';
+  pintarConclusion();
+  refrescar();
+}
+
+function pintarResumen(){
+  const E = D.estadisticas.por_clase;
+  $('#resumen').innerHTML = CLASES.map(c => `
+    <button type="button" class="clase" style="--c:${COLOR[c]}" data-c="${c}" aria-pressed="${filtro===c}"
+      aria-label="${NOMBRE[c]}: ${E[c].n} leads. ${QUE[c]}. ${filtro===c?'Filtro activo, pulsa para quitarlo':'Pulsa para ver solo estos leads'}">
+      <span class="nombre">${NOMBRE[c]}</span>
+      <span class="n num">${E[c].n}</span>
+      <span class="que">${QUE[c]}</span>
+      ${filtro===c?'<span class="sel">Mostrando solo estos</span>':''}
+    </button>`).join('');
+  document.querySelectorAll('.clase').forEach(b => b.onclick = () => { filtro = filtro===b.dataset.c ? null : b.dataset.c; refrescar(); });
+}
+
+function pintarConclusion(){
+  const R = D.resumen || {};
+  const caja = $('#concl-cuerpo');
+  if (!R.resumen_ejecutivo) { caja.innerHTML = '<p class="muted">Todavía no hay análisis. Ejecuta la capa 2 y vuelve a generar el panel.</p>'; return; }
+  caja.innerHTML = `<p>${esc(R.resumen_ejecutivo)}</p>
+    <details><summary>Oportunidades y riesgos</summary>
+      <h3 style="margin-top:12px">Oportunidades</h3><ul>${(R.oportunidades_globales||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ul>
+      <h3 style="margin-top:12px">Riesgos</h3><ul>${(R.riesgos_globales||[]).map(o=>`<li>${esc(o)}</li>`).join('')}</ul>
+    </details>`;
+}
+
+function pintarTabla(){
+  const vis = L.filter(l => (!filtro || l.clasificacion===filtro) &&
+    (!texto || [l.empresa,l.nombre_completo,l.sector,l.id_lead].join(' ').toLowerCase().includes(texto)));
+  $('#estado').textContent = `Mostrando ${vis.length} de ${L.length} leads` + (filtro ? ` (${NOMBRE[filtro]})` : '') + (texto ? ` que contienen «${texto}»` : '') + '.';
+  const cols = SERVIDOR ? 8 : 7;
+  $('#tbody').innerHTML = vis.length ? vis.map(l => {
+    const a = l.analisis, rev = l.clasificacion==='REVISAR DATOS';
+    return `<tr>
+      <td data-label="Prioridad"><span class="prio">${esc(PRIO[a.prioridad]||'Sin prioridad')}</span></td>
+      <td data-label="Empresa"><span><span class="emp">${esc(l.empresa)}</span><span class="sub">${esc(l.nombre_completo)} · ${esc(l.sector)}</span></span></td>
+      <td data-label="Puntuación"><span class="num"><b>${l.puntuacion}</b> <span class="sub">de 100</span></span></td>
+      <td data-label="Clase"><span><span class="etq" style="--c:${COLOR[l.clasificacion]}">${NOMBRE[l.clasificacion]}</span>${rev&&l.potencial_si_se_corrige?`<span class="sub" style="display:block">Sería ${l.potencial_si_se_corrige} con datos corregidos</span>`:''}</span></td>
+      ${SERVIDOR?`<td data-label="Estado">${esc(l.estado||'Pendiente')}</td>`:''}
+      <td data-label="Fecha límite" class="num">${fecha(a.fecha_limite)}</td>
+      <td data-label="Qué hacer">${esc(a.accion)}</td>
+      <td data-label="Detalle"><button type="button" class="btn" data-id="${esc(l.id_lead)}" aria-label="Ver ficha de ${esc(l.empresa)}">Ver ficha</button></td>
+    </tr>`;
+  }).join('') : `<tr><td colspan="${cols}" class="vacio">Ningún lead coincide. Pulsa «Ver todos» o cambia la búsqueda.</td></tr>`;
+  document.querySelectorAll('#tbody button[data-id]').forEach(b => b.onclick = () => abrir(b.dataset.id, b));
+}
+
+/* ── ficha ── */
+const dlg = $('#dlg');
+let origen = null, fichaAbierta = null;
+function abrir(id, boton){
+  const l = L.find(x => x.id_lead===id); if (!l) return;
+  const a = l.analisis, d = l.desglose, rev = l.clasificacion==='REVISAR DATOS';
+  const fila = (nom, b) => `<div class="fila"><span>${nom}</span><span class="b" aria-hidden="true"><span style="width:${100*b.total/b.max}%"></span></span><span class="num">${b.total} de ${b.max}</span></div>`;
+  if (boton) origen = boton;
+  fichaAbierta = id;
+  $('#ficha').innerHTML = `
+    <header>
+      <div><h2 id="d-tit">${esc(l.empresa)}</h2><p class="muted">${esc(l.nombre_completo)} · ${esc(l.cargo||'Cargo desconocido')}</p></div>
+      <button type="button" class="btn" id="cerrar">Cerrar</button>
+    </header>
+    <div class="nota">
+      <span class="grande num">${l.puntuacion}</span><span class="muted">de 100</span>
+      <span class="etq" style="--c:${COLOR[l.clasificacion]}">${NOMBRE[l.clasificacion]}</span>
+      ${rev&&l.potencial_si_se_corrige?`<span>Sería <b>${l.potencial_si_se_corrige}</b> con los datos corregidos</span>`:''}
+    </div>
+    ${SERVIDOR?`<section class="seguimiento" aria-labelledby="s-tit"><h3 id="s-tit">Seguimiento</h3>
+      <label>Estado<select id="s-estado">${D.opciones.estados.map(e=>`<option ${e===(l.estado||'Pendiente')?'selected':''}>${esc(e)}</option>`).join('')}</select></label>
+      <label>Notas<textarea id="s-notas">${esc(l.notas||'')}</textarea></label>
+      <div class="acciones"><span class="msg" id="s-msg" role="status" aria-live="polite"></span><button type="button" class="btn prim" id="s-guardar">Guardar seguimiento</button></div>
+      ${l.actualizado?`<p class="historial">Última modificación: ${esc(l.actualizado.replace('T',' '))} por ${esc(l.actualizado_por||'')}</p>`:''}
+    </section>`:''}
+    ${(l.errores.length||l.avisos.length)?`<div class="aviso"><h3>Problemas en los datos</h3><ul>${l.errores.map(e=>`<li><b>Error:</b> ${esc(e)}</li>`).join('')}${l.avisos.map(e=>`<li>Aviso: ${esc(e)}</li>`).join('')}</ul></div>`:''}
+    <section><h3>Qué hacer</h3><p>${esc(a.accion)}</p>
+      <p class="muted">${esc(PRIO[a.prioridad]||'')}${a.canal?' · '+esc(a.canal):''}${a.fecha_limite?' · antes del '+fecha(a.fecha_limite):''}</p></section>
+    <section><h3>Por qué</h3><p>${esc(a.justificacion)}</p>${a.automatico?'<p class="muted" style="margin-top:4px">Texto generado por el motor de reglas. Este lead aún no tiene análisis detallado.</p>':''}</section>
+    <section class="desglose" aria-label="Desglose de la puntuación"><h3>De dónde sale la puntuación</h3>
+      ${fila('Encaje',d.encaje)}${fila('Intención de compra',d.intencion)}${fila('Interacción',d.engagement)}
+      <div class="fila"><span>Contacto reciente</span><span class="muted" style="font-size:.9rem">${l.dias_sin_contacto ?? 'Sin dato'} días sin contacto</span><span class="num">${d.recencia}</span></div>
+    </section>
+    ${a.oportunidades?.length?`<section><h3>Oportunidades</h3><ul>${a.oportunidades.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></section>`:''}
+    ${a.riesgos?.length?`<section><h3>Riesgos</h3><ul>${a.riesgos.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></section>`:''}
+    ${a.correo?`<section><h3>Correo propuesto</h3><div class="correo">
+        <div class="asunto">${esc(a.correo.asunto)}</div><pre id="cuerpo">${esc(a.correo.cuerpo)}</pre>
+        <div class="pie"><span class="muted" style="overflow-wrap:anywhere">Para: ${esc(l.email)}</span>
+          <span><span id="copiado" role="status" aria-live="polite" class="muted"></span> <button type="button" class="btn prim" id="copiar">Copiar correo</button></span></div>
+      </div></section>`:`<section><h3>Correo</h3><p class="muted">${a.automatico?'Sin correo propuesto para este lead.':'No hay correo: primero hay que corregir los datos de contacto.'}</p></section>`}
+    <dl class="datos">
+      <div><dt>Presupuesto</dt><dd class="num">${l.presupuesto_eur?eur(l.presupuesto_eur):'Sin dato'}</dd></div>
+      <div><dt>Plazo de compra</dt><dd>${esc(l.plazo_compra||'Sin dato')}</dd></div>
+      <div><dt>Empleados</dt><dd class="num">${esc(l.empleados||'Sin dato')}</dd></div>
+      <div><dt>Origen</dt><dd>${esc(l.origen)}</dd></div>
+      <div><dt>Teléfono</dt><dd class="num">${esc(l.telefono||'Sin dato')}</dd></div>
+      <div><dt>Ubicación</dt><dd>${esc(l.ciudad)}, ${esc(l.pais)}</dd></div>
+      ${l.comentarios?`<div style="grid-column:1/-1"><dt>Notas</dt><dd>${esc(l.comentarios)}</dd></div>`:''}
+    </dl>
+    ${SERVIDOR?`<section><h3>Historial</h3><ul class="historial" id="hist"><li>Cargando…</li></ul></section>
+    <div class="acciones">
+      <button type="button" class="btn peligro" id="b-borrar">Eliminar lead</button>
+      <button type="button" class="btn" id="b-editar">Editar datos</button>
+    </div>`:''}`;
+  $('#cerrar').onclick = () => dlg.close();
+  const cp = $('#copiar');
+  if (cp) cp.onclick = () => {
+    const txt = `Asunto: ${a.correo.asunto}\n\n${a.correo.cuerpo}`;
+    const ok = () => { $('#copiado').textContent = 'Correo copiado.'; };
+    const manual = () => { const r = document.createRange(); r.selectNodeContents($('#cuerpo')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $('#copiado').textContent = 'Texto seleccionado: pulsa Ctrl+C para copiarlo.'; };
+    try { navigator.clipboard.writeText(txt).then(ok, manual); } catch(e) { manual(); }
+  };
+  if (SERVIDOR) prepararFichaServidor(l);
+  if (!dlg.open) { dlg.showModal(); dlg.scrollTop = 0; $('#cerrar').focus(); }
+}
+dlg.addEventListener('close', () => { fichaAbierta = null; if (origen) origen.focus(); });
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+function prepararFichaServidor(l){
+  api('GET', `/api/leads/${encodeURIComponent(l.id_lead)}/historial`).then(h => {
+    $('#hist').innerHTML = h.length ? h.map(x => `<li>${esc(x.fecha.replace('T',' '))} · ${esc(x.usuario)} · ${esc(x.accion)}${x.detalle?': '+esc(x.detalle):''}</li>`).join('') : '<li>Sin movimientos.</li>';
+  }).catch(() => { $('#hist').innerHTML = '<li>No se ha podido cargar el historial.</li>'; });
+  $('#s-guardar').onclick = async () => {
+    const msg = $('#s-msg'); msg.className = 'msg'; msg.textContent = 'Guardando…';
+    try {
+      await api('PATCH', `/api/leads/${encodeURIComponent(l.id_lead)}/seguimiento`, {estado: $('#s-estado').value, notas: $('#s-notas').value});
+      await recargar(); abrir(l.id_lead); avisar('Seguimiento guardado');
+    } catch(e) { msg.className = 'msg err'; msg.textContent = e.message; }
+  };
+  $('#b-editar').onclick = () => abrirFormulario(l);
+  const borrar = $('#b-borrar');
+  borrar.onclick = async () => {
+    if (borrar.dataset.confirmar !== '1') { borrar.dataset.confirmar = '1'; borrar.textContent = 'Pulsa otra vez para eliminarlo'; return; }
+    try { await api('DELETE', `/api/leads/${encodeURIComponent(l.id_lead)}`); dlg.close(); await recargar(); avisar(`${l.empresa} eliminado`); }
+    catch(e) { avisar(e.message); }
+  };
+}
+
+/* ── alta y edición ── */
+const CAMPOS = [
+  ['empresa','Empresa','text',true],['sector','Sector','sector'],['nombre','Nombre','text'],['apellidos','Apellidos','text'],
+  ['email','Email','email'],['telefono','Teléfono','tel'],['cargo','Cargo','text'],['empleados','Empleados','number'],
+  ['pais','País','text'],['ciudad','Ciudad','text'],['origen','Origen','origen'],['presupuesto_eur','Presupuesto (€)','number'],
+  ['plazo_compra','Plazo de compra','plazo'],['demo_solicitada','¿Ha pedido demo?','demo'],['visitas_web','Visitas web','number'],
+  ['descargas','Descargas','number'],['emails_abiertos','Emails abiertos','number'],['fecha_alta','Fecha de alta','date'],
+  ['ultimo_contacto','Último contacto','date'],['comentarios','Comentarios','area']];
+function abrirFormulario(l){
+  const editar = !!l, v = l || {pais:'España', demo_solicitada:'No', plazo_compra:'Sin definir', fecha_alta: D.meta.fecha_referencia, ultimo_contacto: D.meta.fecha_referencia};
+  const sel = (id, ops, val) => `<select id="f-${id}" name="${id}">${['',...ops].map(o=>`<option ${o===(val||'')?'selected':''} value="${esc(o)}">${o?esc(o):'Sin dato'}</option>`).join('')}</select>`;
+  const control = ([id, , tipo]) => {
+    const val = v[id] ?? '';
+    if (tipo==='sector') return sel(id, D.opciones.sectores, val);
+    if (tipo==='origen') return sel(id, D.opciones.origenes, val);
+    if (tipo==='plazo') return sel(id, D.opciones.plazos, val);
+    if (tipo==='demo') return sel(id, ['Sí','No'], val);
+    if (tipo==='area') return `<textarea id="f-${id}" name="${id}">${esc(val)}</textarea>`;
+    return `<input id="f-${id}" name="${id}" type="${tipo==='number'?'text':tipo}" ${tipo==='number'?'inputmode="numeric"':''} value="${esc(val)}">`;
+  };
+  $('#form-lead').innerHTML = `
+    <header><h2 id="f-tit">${editar?'Editar '+esc(l.empresa):'Añadir lead'}</h2><button type="button" class="btn" data-cerrar>Cerrar</button></header>
+    <p class="muted">Al guardar, el motor valida los datos y vuelve a calcular la puntuación y la clase.</p>
+    <div class="form">${CAMPOS.map(c => `<label class="${c[2]==='area'?'ancho':''}" for="f-${c[0]}">${c[1]}${c[3]?' (obligatorio)':''}${control(c)}</label>`).join('')}</div>
+    <p class="msg" id="f-msg" role="status" aria-live="polite"></p>
+    <div class="acciones"><button type="submit" class="btn prim">${editar?'Guardar cambios':'Añadir lead'}</button></div>`;
+  $('#form-lead').onsubmit = async e => {
+    e.preventDefault();
+    const datos = Object.fromEntries(new FormData($('#form-lead')).entries());
+    const msg = $('#f-msg');
+    if (!datos.empresa.trim()) { msg.className = 'msg err'; msg.textContent = 'Escribe el nombre de la empresa.'; $('#f-empresa').focus(); return; }
+    msg.className = 'msg'; msg.textContent = 'Guardando…';
+    try {
+      const r = editar ? await api('PUT', `/api/leads/${encodeURIComponent(l.id_lead)}`, datos) : await api('POST', '/api/leads', datos);
+      $('#dlg-form').close();
+      await recargar();
+      const id = editar ? l.id_lead : r.id_lead;
+      const nuevo = L.find(x => x.id_lead === id);
+      avisar(editar ? 'Cambios guardados' : `Lead añadido: ${nuevo.clasificacion}, ${nuevo.puntuacion} puntos`);
+      abrir(id);
+    } catch(err) { msg.className = 'msg err'; msg.textContent = err.message; }
+  };
+  $('#dlg-form').showModal();
+  $('#f-empresa').focus();
+}
+
+/* ── importar ── */
+$('#form-imp').onsubmit = async e => {
+  e.preventDefault();
+  const msg = $('#imp-msg');
+  if (!$('#fichero').files.length) { msg.className = 'msg err'; msg.textContent = 'Elige un fichero.'; return; }
+  msg.className = 'msg'; msg.textContent = 'Importando…';
+  try {
+    const r = await api('POST', '/api/importar', new FormData($('#form-imp')));
+    await recargar();
+    msg.className = 'msg ok'; msg.textContent = `${r.importados} leads importados y puntuados.`;
+    $('#fichero').value = '';
+  } catch(err) { msg.className = 'msg err'; msg.textContent = err.message; }
+};
+
+/* ── usuarios ── */
+async function abrirUsuarios(){
+  const cont = $('#usuarios');
+  let lista = [];
+  try { lista = await api('GET', '/api/usuarios'); } catch(e) { avisar(e.message); return; }
+  cont.innerHTML = `
+    <header><h2 id="u-tit">Usuarios</h2><button type="button" class="btn" data-cerrar>Cerrar</button></header>
+    <ul class="lista-usuarios">${lista.map(u => `<li><span><b>${esc(u.nombre)}</b><br><span class="muted">${esc(u.email)} · ${u.rol==='admin'?'Administrador':'Comercial'}</span></span>
+      ${u.id===D.usuario.id?'<span class="muted">Tú</span>':`<button type="button" class="btn peligro" data-borrar="${u.id}">Quitar acceso</button>`}</li>`).join('')}</ul>
+    <form id="form-usr" class="form" novalidate>
+      <h3 class="ancho">Nuevo usuario</h3>
+      <label for="u-nombre">Nombre<input id="u-nombre" name="nombre" autocomplete="off"></label>
+      <label for="u-email">Email<input id="u-email" name="email" type="email" autocomplete="off"></label>
+      <label for="u-clave">Contraseña (mínimo 8)<input id="u-clave" name="clave" type="password" autocomplete="new-password"></label>
+      <label for="u-rol">Rol<select id="u-rol" name="rol"><option value="comercial">Comercial</option><option value="admin">Administrador</option></select></label>
+      <p class="msg ancho" id="u-msg" role="status" aria-live="polite"></p>
+      <div class="acciones ancho"><button type="submit" class="btn prim">Crear usuario</button></div>
+    </form>`;
+  cont.querySelectorAll('[data-borrar]').forEach(b => b.onclick = async () => {
+    if (b.dataset.confirmar !== '1') { b.dataset.confirmar = '1'; b.textContent = 'Pulsa otra vez'; return; }
+    try { await api('DELETE', `/api/usuarios/${b.dataset.borrar}`); abrirUsuarios(); avisar('Acceso quitado'); } catch(e) { avisar(e.message); }
+  });
+  $('#form-usr').onsubmit = async e => {
+    e.preventDefault();
+    const msg = $('#u-msg');
+    try { await api('POST', '/api/usuarios', Object.fromEntries(new FormData($('#form-usr')).entries())); await abrirUsuarios(); avisar('Usuario creado'); }
+    catch(err) { msg.className = 'msg err'; msg.textContent = err.message; }
+  };
+  if (!$('#dlg-usr').open) $('#dlg-usr').showModal();
+}
+
+/* ── eventos generales ── */
+document.addEventListener('click', e => { const b = e.target.closest('[data-cerrar]'); if (b) b.closest('dialog').close(); });
+['#dlg-form','#dlg-imp','#dlg-usr'].forEach(s => $(s).addEventListener('click', e => { if (e.target === $(s)) $(s).close(); }));
+$('#b-nuevo').onclick = () => abrirFormulario(null);
+$('#b-importar').onclick = () => { $('#imp-msg').textContent = ''; $('#dlg-imp').showModal(); };
+$('#b-usuarios').onclick = abrirUsuarios;
+$('#q').oninput = e => { texto = e.target.value.trim().toLowerCase(); pintarTabla(); };
+$('#todos').onclick = () => { filtro = null; texto = ''; $('#q').value = ''; refrescar(); };
+
+function refrescar(){ pintarResumen(); pintarTabla(); }
+
+if (SERVIDOR) recargar().catch(e => { $('#estado').textContent = e.message; });
+else iniciar();
+</script>

@@ -1,0 +1,31 @@
+id_lead,nombre,apellidos,email,telefono,empresa,cargo,sector,empleados,pais,ciudad,origen,presupuesto_eur,plazo_compra,visitas_web,descargas,emails_abiertos,demo_solicitada,fecha_alta,ultimo_contacto,comentarios
+L001,Lucía,Fernández Ortega,lucia.fernandez@logistica-iberia.es,+34 612 345 678,Logística Iberia SL,Directora de Operaciones,Logística,250,España,Madrid,Referido,45000,Inmediato,18,4,9,Sí,2026-09-10,2026-11-18,Quiere sustituir su CRM actual antes del Q1
+L002,Javier,Ruiz Martín,jruiz@textilnorte.com,+34 655 112 233,Textil Norte SA,CEO,Retail,120,España,Bilbao,Feria,30000,1-3 meses,12,3,7,Sí,2026-10-02,2026-11-20,Conocido en la feria Retail Tech; pidió propuesta
+L003,Marta,Gómez Sánchez,marta.gomez@clinicasaludplus.es,+34 630 998 120,Clínicas Salud Plus,Directora Financiera,Salud,400,España,Valencia,Webinar,60000,1-3 meses,22,6,11,Sí,2026-08-15,2026-11-15,Comparando con dos competidores
+L004,Pedro,Alonso Vega,palonso@metalurgicasur.es,+34 677 450 300,Metalúrgica del Sur,Director de Compras,Industria,180,España,Sevilla,LinkedIn,25000,1-3 meses,9,2,6,Sí,2026-09-28,2026-11-10,Necesita integración con su ERP
+L005,Ana,Torres Blanco,ana.torres@softwave.io,+34 699 230 541,Softwave Technologies,CTO,Tecnología,85,España,Barcelona,Web,35000,Inmediato,25,5,12,Sí,2026-10-20,2026-11-21,Startup en crecimiento; ronda de financiación cerrada
+L006,Carlos,Navarro Gil,cnavarro@grupoalimentaria.com,+34 616 780 902,Grupo Alimentaria Levante,Director Comercial,Industria,600,España,Murcia,Referido,80000,3-6 meses,14,3,8,Sí,2026-07-01,2026-11-05,Proyecto para 3 plantas; decide comité
+L007,Sofía,Delgado Pinto,sofia.delgado@retailmax.pt,+351 912 345 678,RetailMax,Head of Sales,Retail,300,Portugal,Lisboa,Webinar,40000,1-3 meses,16,4,10,Sí,2026-09-05,2026-11-12,Expansión a España en 2027
+L008,Diego,Moreno Castro,dmoreno@transportesrapidos.es,+34 644 321 987,Transportes Rápidos,Jefe de Flota,Logística,60,España,Zaragoza,Web,12000,3-6 meses,7,2,4,No,2026-09-01,2026-10-25,
+L009,Elena,Romero Pastor,eromero@farmadirect.es,+34 622 145 876,FarmaDirect,Responsable de Marketing,Salud,45,España,Málaga,LinkedIn,15000,3-6 meses,10,3,6,No,2026-08-20,2026-11-02,Interesada en automatización de campañas
+L010,Raúl,Jiménez Ortega,rjimenez@innovatech.mx,+52 55 1234 5678,Innovatech,Gerente de TI,Tecnología,150,México,Ciudad de México,Webinar,20000,3-6 meses,8,2,5,No,2026-09-15,2026-10-30,
+L011,Laura,Martínez Ruiz,laura.martinez@modaurbana.es,+34 611 908 765,Moda Urbana,Coordinadora de Ventas,Retail,35,España,Madrid,Email frío,8000,1-3 meses,6,1,5,Sí,2026-10-10,2026-11-14,
+L012,Andrés,Castillo Rojas,acastillo@plasticosandinos.co,+57 300 123 4567,Plásticos Andinos,Director General,Industria,90,Colombia,Medellín,Feria,18000,+6 meses,5,1,3,No,2026-06-12,2026-09-20,Presupuesto aprobado para 2027
+L013,Paula,Herrera Díaz,pherrera@herreraconsultores.es,+34 633 567 210,Herrera Consultores,Socia Directora,Servicios profesionales,25,España,Valladolid,Referido,10000,1-3 meses,9,2,6,Sí,2026-10-01,2026-11-17,
+L014,Miguel Ángel,Ortiz Lara,maortiz@ecoenergia.es,+34 688 432 109,EcoEnergía Renovables,Responsable de Operaciones,Energía,110,España,Pamplona,Web,22000,3-6 meses,11,3,4,No,2026-08-01,2026-10-01,
+L015,Isabel,Santos Gil,isantos@hotelesmarazul.es,+34 655 876 543,Hoteles Mar Azul,Directora de Marketing,Hostelería,200,España,Palma,Webinar,15000,3-6 meses,13,4,7,No,2026-07-20,2026-10-28,Temporada alta empieza en abril
+L016,Tomás,Vidal Roca,tvidal@distribucionesvidal.es,+34 620 111 222,Distribuciones Vidal,Gerente,Logística,40,España,Valencia,LinkedIn,9000,1-3 meses,4,1,3,No,2026-10-15,2026-11-08,
+L017,Nuria,Prieto León,nprieto@academiaprieto.es,+34 987 654 321,Academia Prieto,Administrativa,Educación,8,España,León,Email frío,1500,Sin definir,1,0,1,No,2026-03-10,2026-04-02,
+L018,Óscar,Molina Ruiz,omolina.design@gmail.com,+34 645 789 012,Óscar Molina Diseño,Diseñador,Servicios profesionales,1,España,Granada,Web,500,+6 meses,2,1,0,No,2026-09-01,2026-09-03,Autónomo
+L019,Cristina,Vargas Peña,cvargas@ayto-villanueva.es,+34 925 123 456,Ayuntamiento de Villanueva,Técnica de Sistemas,Administración pública,50,España,Toledo,Feria,3000,+6 meses,1,0,2,No,2026-02-14,2026-03-01,Requiere licitación pública
+L020,Hugo,Serrano Díaz,hserrano@barelpuerto.es,+34 956 789 123,Bar El Puerto,Propietario,Hostelería,6,España,Cádiz,Web,800,Sin definir,3,0,1,No,2026-10-05,2026-10-06,
+L021,Rocío,Méndez Soto,rmendez@estudiomendez.es,+34 985 222 333,Estudio Méndez Arquitectura,Arquitecta,Servicios profesionales,4,España,Oviedo,LinkedIn,2000,+6 meses,2,1,1,No,2026-07-07,2026-08-01,
+L022,Iván,Cano Ferrer,icano@colegiosanjose.es,+34 947 111 000,Colegio San José,Profesor,Educación,70,España,Burgos,Webinar,0,Sin definir,1,1,2,No,2026-09-22,2026-09-22,Asistió al webinar por curiosidad
+L023,Beatriz,Lozano Mora,blozano@floristerialozano.es,+34 923 456 789,Floristería Lozano,Propietaria,Retail,3,España,Salamanca,Email frío,600,+6 meses,1,0,0,No,2025-11-20,2026-01-15,
+L024,Sergio,Pardo Varela,spardo@tallerespardo.es,+34 982 333 444,Talleres Pardo,Mecánico jefe,Industria,12,España,Lugo,Web,2500,Sin definir,2,0,1,No,2026-05-02,2026-05-10,
+L025,Alberto,Ruiz Campos,,+34 600 300 200,Construcciones Ruiz,Director General,Construcción,75,España,Albacete,Feria,20000,1-3 meses,6,1,0,Sí,2026-10-18,2026-11-16,Dejó la tarjeta en la feria pero sin email
+L026,Verónica,Paz Iglesias,veronica.paz@@innovaretail.es,+34 677 888 999,InnovaRetail,Directora de Ventas,Retail,140,España,Madrid,Referido,35000,Inmediato,15,4,0,Sí,2026-10-25,2026-11-19,Muy interesada; urge implantación
+L027,Gabriel,Ferrer Puig,gferrer@quimicasferrer.es,+34 619 555 777,Químicas Ferrer,Director de Compras,Industria,-20,España,Tarragona,LinkedIn,50000,3-6 meses,10,2,5,No,2026-09-12,2026-11-01,
+L028,Natalia,Ríos Campos,nrios@agroverde.es,+34 628 444 111,AgroVerde,Gerente,Agroalimentario,30,España,Lleida,Web,-5000,1-3 meses,5,1,2,No,2026-10-01,2026-09-15,
+L029,Ana,Torres,ana.torres@softwave.io,,Softwave Technologies,CTO,Tecnología,85,España,Barcelona,Webinar,5000,3-6 meses,3,1,2,No,2026-11-01,2026-11-02,Se registró de nuevo en el webinar
+L030,Fernando,Gil Sanz,fgil@logisur.es,12345,LogiSur,,Logística,95,España,Córdoba,Web,,,0,0,1,Sí,2026-10-20,2027-01-10,

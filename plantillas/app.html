@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CRM de Leads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='crm.css') }}">
+</head>
+<body>
+<a class="skip" href="#vista">Ir al contenido</a>
+<div class="wrap">
+  <header class="cab">
+    <div class="marca">
+      <h1>CRM de Leads</h1>
+      <p class="muted" id="sub">Cargando…</p>
+    </div>
+    <form method="post" action="/logout" class="usuario" id="f-salir">
+      <input type="hidden" name="csrf" id="csrf-salir">
+      <span class="muted" id="quien"></span>
+      <button type="submit" class="btn peq">Salir</button>
+    </form>
+  </header>
+
+  <nav class="secciones" aria-label="Secciones">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#leads">Leads</a>
+    <a href="#clientes">Clientes y contactos</a>
+    <a href="#embudo">Embudo</a>
+    <a href="#oportunidades">Oportunidades</a>
+    <a href="#tareas">Tareas</a>
+    <a href="#ia">Inteligencia artificial</a>
+    <a href="#informes">Informes</a>
+    <a href="#ajustes">Ajustes</a>
+  </nav>
+
+  <main id="vista" tabindex="-1" style="display:grid;gap:24px"><p class="cargando">Cargando…</p></main>
+</div>
+
+<dialog id="dlg" aria-labelledby="d-tit"><div class="ficha" id="ficha"></div></dialog>
+<dialog id="dlg-form" aria-labelledby="f-tit"><form class="ficha" id="form" novalidate></form></dialog>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<script src="{{ url_for('static', filename='crm.js') }}"></script>
+</body>
+</html>

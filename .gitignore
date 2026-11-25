@@ -1,0 +1,20 @@
+# Secretos y entorno local
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Bases de datos locales y copias
+*.db
+legado/.clave_secreta
+
+# Salidas generadas (se crean desde la app)
+salidas/*.xlsx
+salidas/*.html
+salidas/*.csv
+salidas/panel_datos.json
+salidas/capa1_leads_puntuados.json
+
+# Herramientas
+.claude/

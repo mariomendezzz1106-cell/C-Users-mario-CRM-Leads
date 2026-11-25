@@ -1,0 +1,23 @@
+# Web
+flask>=3.0,<4
+flask-sqlalchemy>=3.1,<4
+waitress>=3.0          # servidor para Windows (local)
+gunicorn>=22.0; sys_platform != "win32"   # servidor de producción (Render / Docker)
+python-dotenv>=1.0     # lee el fichero .env en local
+
+# Base de datos
+SQLAlchemy>=2.0,<3
+psycopg[binary]>=3.2,<4
+
+# Seguridad
+argon2-cffi>=23.1
+
+# Motor e informes (capas 1 y 3)
+pandas>=2.0
+openpyxl>=3.1
+
+# Inteligencia artificial (capa 2)
+anthropic>=0.80
+
+# Pruebas
+pytest>=8.0

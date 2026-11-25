@@ -1,0 +1,447 @@
+{
+  "resumen_ejecutivo": "De 30 leads, 8 son HOT y suman 325.000 € de presupuesto declarado. Casi todos piden demo y tienen plazo de compra de 3 meses o menos, así que conviene atenderlos esta semana. Los 8 WARM tienen buen encaje pero poca urgencia y se pueden trabajar con contenido de valor y llamadas cortas. Los 8 COLD son empresas muy pequeñas, de sectores fuera de objetivo o sin contacto reciente: van a nurturing automático. El punto más urgente está en REVISAR DATOS: InnovaRetail (L026) y Construcciones Ruiz (L025) serían HOT con los datos corregidos, y ahora mismo no se les puede escribir porque no hay un email válido.",
+  "oportunidades_globales": [
+    "Retail concentra 3 HOT (L002, L007 y L026 si se corrige): se puede preparar una demo sectorial común y reutilizarla.",
+    "Hay 3 leads referidos con alta puntuación (L001, L006, L013): conviene activar el programa de referidos con los clientes que los enviaron.",
+    "RetailMax (L007) planea expandirse a España en 2027, con opción de un contrato multipaís."
+  ],
+  "riesgos_globales": [
+    "Clínicas Salud Plus (L003) está comparando con dos competidores. Si no hay demo esta semana, el lead puede perderse.",
+    "6 de 30 leads (20 %) tienen datos erróneos: hay que revisar el formulario de la feria y la validación del formulario web.",
+    "El lead duplicado de Softwave (L029) declara un presupuesto de 5.000 € frente a los 35.000 € de L005. Hay que confirmar la cifra real antes de enviar la propuesta."
+  ],
+  "leads": [
+    {
+      "id_lead": "L003",
+      "justificacion": "Es el lead con mejor puntuación (95). Tiene encaje casi perfecto: 400 empleados, sector salud y una decisora financiera. Declara 60.000 € de presupuesto, compra en 1–3 meses y muestra el mayor engagement de la cartera (22 visitas, 6 descargas).",
+      "accion": "El comercial senior llama hoy para cerrar una demo personalizada orientada a ROI y control de costes.",
+      "canal": "Llamada",
+      "prioridad": "P1",
+      "plazo_accion": "24 h",
+      "fecha_limite": "2026-11-24",
+      "oportunidades": ["Mayor presupuesto entre los leads listos para comprar", "Grupo con varias clínicas: posible ampliación por centros"],
+      "riesgos": ["Compara con dos competidores", "La decisora es financiera: llevar un caso de ROI con cifras"],
+      "correo": {
+        "asunto": "Marta, demo de {producto} centrada en ROI para Clínicas Salud Plus",
+        "cuerpo": "Hola, Marta:\n\nGracias por asistir a nuestro webinar y por el interés en {producto}. Sé que está comparando varias opciones, así que le propongo una demo de 30 minutos enfocada en lo que más le importa a una dirección financiera: coste total, plazos de implantación (4–6 semanas) y retorno esperado en un grupo de clínicas como el suyo.\n\n¿Le encaja el miércoles 25 a las 10:00 o el jueves 26 a las 16:00?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L001",
+      "justificacion": "Puntuación de 92. Directora de Operaciones de una logística de 250 empleados, en sector objetivo y llegada por referido. Su compra es inmediata (quiere sustituir su CRM antes del Q1), tiene 45.000 € de presupuesto y ya ha pedido demo.",
+      "accion": "Llamar hoy para agendar la demo y preparar un plan de migración desde su CRM actual.",
+      "canal": "Llamada",
+      "prioridad": "P1",
+      "plazo_accion": "24 h",
+      "fecha_limite": "2026-11-24",
+      "oportunidades": ["Urgencia real por fecha (antes del Q1)", "Viene por referido: suele cerrar antes"],
+      "riesgos": ["La migración de datos del CRM actual puede alargar la implantación más allá del Q1"],
+      "correo": {
+        "asunto": "Lucía, plan para tener {producto} funcionando antes del Q1",
+        "cuerpo": "Hola, Lucía:\n\nMe comentan que queréis sustituir vuestro CRM antes del Q1. Con una implantación estándar de 4–6 semanas, si empezamos en diciembre llegamos con margen. Te propongo una demo de 45 minutos en la que veamos tu proceso de operaciones y un plan de migración de datos paso a paso.\n\n¿Te viene bien el martes 24 a las 12:00 o el miércoles 25 a las 9:30?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L005",
+      "justificacion": "Puntuación de 92. CTO de una tecnológica de 85 empleados con compra inmediata, 35.000 € de presupuesto y el engagement más alto en visitas web (25). Acaba de cerrar una ronda de financiación.",
+      "accion": "Demo técnica (API, integraciones, seguridad) esta semana, con preventa técnica.",
+      "canal": "Reunión",
+      "prioridad": "P1",
+      "plazo_accion": "24 h",
+      "fecha_limite": "2026-11-24",
+      "oportunidades": ["Startup en crecimiento: el número de licencias aumentará", "Hay financiación disponible"],
+      "riesgos": ["Existe un registro duplicado (L029) con un presupuesto de 5.000 €: confirmar la cifra real"],
+      "correo": {
+        "asunto": "Ana, demo técnica de {producto} (API e integraciones)",
+        "cuerpo": "Hola, Ana:\n\nEnhorabuena por la ronda. Como tu interés es inmediato, te propongo una sesión técnica de 45 minutos con nuestro equipo de preventa: API, integraciones con vuestro stack, seguridad y escalabilidad a medida que crezca el equipo.\n\n¿Te cuadra el martes 24 a las 17:00 o el miércoles 25 a las 11:00?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L007",
+      "justificacion": "Puntuación de 88. Head of Sales de un retailer portugués de 300 empleados, con compra en 1–3 meses, 40.000 € de presupuesto, demo solicitada y buen engagement.",
+      "accion": "Agendar una demo orientada a equipos comerciales multipaís.",
+      "canal": "Reunión",
+      "prioridad": "P1",
+      "plazo_accion": "48 h",
+      "fecha_limite": "2026-11-25",
+      "oportunidades": ["Expansión a España en 2027: el contrato puede crecer", "Se puede reutilizar la demo de retail"],
+      "riesgos": ["Puede necesitar soporte en portugués", "Decisión condicionada al plan de expansión"],
+      "correo": {
+        "asunto": "Sofía, {producto} para vuestra expansión a España",
+        "cuerpo": "Hola, Sofía:\n\nGracias por apuntarte al webinar. Vi que RetailMax planea abrir en España en 2027: {producto} permite gestionar equipos comerciales en varios países desde una sola plataforma. Te propongo una demo de 30 minutos centrada en cómo organizar el pipeline de ventas en Portugal y España.\n\n¿Te viene bien el miércoles 25 a las 11:00 o el jueves 26 a las 15:00?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L002",
+      "justificacion": "Puntuación de 87. CEO de un retail textil de 120 empleados, conocido en feria, con 30.000 € de presupuesto, compra en 1–3 meses y propuesta ya solicitada.",
+      "accion": "Enviar la propuesta comercial y cerrar una reunión de presentación con el CEO.",
+      "canal": "Reunión",
+      "prioridad": "P1",
+      "plazo_accion": "48 h",
+      "fecha_limite": "2026-11-25",
+      "oportunidades": ["Habla directamente con el CEO: ciclo de decisión corto", "Ya ha pedido propuesta"],
+      "riesgos": ["Si la propuesta llega tarde, se pierde el impulso de la feria"],
+      "correo": {
+        "asunto": "Javier, tu propuesta de {producto} tras Retail Tech",
+        "cuerpo": "Hola, Javier:\n\nFue un placer conocerte en Retail Tech. Como me pediste, te preparo la propuesta para Textil Norte. Para ajustarla bien, me gustaría repasarla contigo en 30 minutos: alcance, número de usuarios y calendario de implantación.\n\n¿Te encaja el miércoles 25 a las 13:00 o el jueves 26 a las 10:00?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L006",
+      "justificacion": "Puntuación de 87. Tiene el encaje máximo (40/40): 600 empleados, industria y Director Comercial. Es el mayor presupuesto de la cartera (80.000 €) y viene por referido. Su plazo es de 3–6 meses, por eso no llega al máximo de intención.",
+      "accion": "Reunión de descubrimiento para mapear el comité de compra y los requisitos de las 3 plantas.",
+      "canal": "Reunión",
+      "prioridad": "P1",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Mayor ticket potencial (80.000 €)", "Despliegue en 3 plantas"],
+      "riesgos": ["Decide un comité: ciclo largo y varios interlocutores", "El plazo de 3–6 meses puede alargarse"],
+      "correo": {
+        "asunto": "{producto} para las tres plantas de Grupo Alimentaria Levante",
+        "cuerpo": "Estimado Carlos:\n\nGracias por su interés en {producto}. Entiendo que el proyecto afecta a tres plantas y que la decisión pasa por un comité. Para preparar una propuesta útil para todos, le propongo una reunión de descubrimiento de 45 minutos en la que identifiquemos necesidades por planta, interlocutores y calendario.\n\n¿Le viene bien el jueves 26 a las 10:00 o el viernes 27 a las 12:00?\n\nUn cordial saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L004",
+      "justificacion": "Puntuación de 81. Director de Compras de una metalúrgica de 180 empleados, con compra en 1–3 meses, 25.000 € de presupuesto y demo solicitada. Su engagement digital es moderado (13/25).",
+      "accion": "Demo centrada en la integración con su ERP, con preventa técnica presente.",
+      "canal": "Reunión",
+      "prioridad": "P1",
+      "plazo_accion": "48 h",
+      "fecha_limite": "2026-11-25",
+      "oportunidades": ["La integración con el ERP puede venderse como servicio adicional"],
+      "riesgos": ["Si su ERP no tiene conector estándar, aumentan el coste y el plazo"],
+      "correo": {
+        "asunto": "Demo de {producto} con integración ERP para Metalúrgica del Sur",
+        "cuerpo": "Estimado Pedro:\n\nGracias por solicitar la demo. Como la integración con su ERP es clave, vendré con nuestro equipo técnico para revisar conectores, flujos de datos y plazos reales. Si me indica qué ERP utilizan, prepararemos un ejemplo concreto.\n\n¿Le encaja el miércoles 25 a las 9:00 o el jueves 26 a las 12:30?\n\nUn cordial saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L013",
+      "justificacion": "Es HOT por poco (72). Tiene poder de decisión (socia directora), compra en 1–3 meses, demo solicitada y viene por referido. Resta que la consultora sea pequeña (25 empleados) y de sector secundario.",
+      "accion": "Demo breve y propuesta con el plan para pymes.",
+      "canal": "Llamada",
+      "prioridad": "P2",
+      "plazo_accion": "48 h",
+      "fecha_limite": "2026-11-25",
+      "oportunidades": ["Decide ella sola: cierre rápido", "Las consultoras suelen recomendar herramientas a sus clientes"],
+      "riesgos": ["Ticket bajo (10.000 €): cuidar el coste de venta"],
+      "correo": {
+        "asunto": "Paula, demo rápida de {producto} para Herrera Consultores",
+        "cuerpo": "Hola, Paula:\n\nGracias por pedir la demo. Para una consultora como la vuestra, lo más útil suele ser ver en 20 minutos cómo se lleva el seguimiento de clientes y propuestas sin complicaciones. Te enseño justo eso y te paso la propuesta del plan para pymes.\n\n¿Te viene bien el martes 24 a las 16:00 o el miércoles 25 a las 10:00?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L015",
+      "justificacion": "WARM alto (68), a 2 puntos de HOT. Tiene encaje (200 empleados, decisora) y buen engagement (13 visitas, 4 descargas), pero compra en 3–6 meses y está en un sector secundario (hostelería).",
+      "accion": "Enviar un caso de éxito de hostelería y proponer una llamada para planificar antes de la temporada alta.",
+      "canal": "Email",
+      "prioridad": "P2",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["La temporada alta (abril) marca una fecha límite natural para implantar"],
+      "riesgos": ["Si no se implanta antes de marzo, la decisión puede pasar a 2027"],
+      "correo": {
+        "asunto": "Isabel, cómo llegar a abril con el CRM ya funcionando",
+        "cuerpo": "Hola, Isabel:\n\nGracias por seguir nuestro webinar. Como vuestra temporada alta empieza en abril, te comparto cómo una cadena hotelera organizó sus campañas y reservas de grupo con {producto}. Con 4–6 semanas de implantación, decidir en enero deja margen suficiente.\n\n¿Hablamos 15 minutos la semana que viene para ver vuestro calendario?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L010",
+      "justificacion": "WARM (63). Tecnológica mexicana de 150 empleados con interlocutor decisor (Gerente de TI), pero su plazo es de 3–6 meses, el presupuesto es medio (20.000 €) y no ha pedido demo.",
+      "accion": "Llamada de cualificación para confirmar el proyecto y la zona horaria del equipo.",
+      "canal": "Llamada",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Entrada en el mercado mexicano"],
+      "riesgos": ["Diferencia horaria y soporte en LATAM", "Hay que confirmar si factura en euros o pesos"],
+      "correo": {
+        "asunto": "Raúl, {producto} para equipos de TI en crecimiento",
+        "cuerpo": "Hola, Raúl:\n\nGracias por asistir al webinar. Te dejo una guía de integración de {producto} con las herramientas de TI más habituales. Me gustaría entender en qué punto está vuestro proyecto y qué plazos manejáis: ¿tienes 15 minutos esta semana? Me adapto a tu horario de Ciudad de México.\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L011",
+      "justificacion": "WARM (61). Tiene intención (1–3 meses y demo solicitada) en un sector objetivo, pero la empresa es pequeña (35 empleados), el presupuesto bajo (8.000 €), llegó por email frío y la interlocutora influye pero no decide.",
+      "accion": "Hacer la demo e invitar a quien decide en Moda Urbana.",
+      "canal": "Reunión",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Ha pedido demo con urgencia de 1–3 meses"],
+      "riesgos": ["No decide ella: hay que llegar a gerencia", "Presupuesto justo para el plan estándar"],
+      "correo": {
+        "asunto": "Laura, tu demo de {producto}",
+        "cuerpo": "Hola, Laura:\n\nGracias por pedir la demo. Te propongo 30 minutos para ver cómo organizar las ventas de Moda Urbana. Si quieres, invita también a quien vaya a tomar la decisión, así resolvemos todas las dudas en una sola sesión.\n\n¿Te viene bien el jueves 26 a las 11:00 o el viernes 27 a las 9:30?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L009",
+      "justificacion": "WARM (59). Sector objetivo (salud) y buen engagement (10 visitas, 3 descargas), pero la empresa es pequeña (45 empleados), compra en 3–6 meses y la interlocutora es de marketing, no decisora.",
+      "accion": "Enviar contenido sobre automatización de campañas y proponer una llamada de 15 minutos.",
+      "canal": "Email",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Ha mostrado interés concreto en la automatización de campañas"],
+      "riesgos": ["La decisión final probablemente no es suya"],
+      "correo": {
+        "asunto": "Elena, 5 automatizaciones de campañas para el sector salud",
+        "cuerpo": "Hola, Elena:\n\nComo te interesa automatizar campañas, te comparto una guía con 5 flujos que usan empresas farmacéuticas con {producto}: bienvenida, recordatorios, reactivación y más. Si quieres, en 15 minutos te enseño cómo quedarían con vuestros datos.\n\n¿Te viene bien alguna mañana de la semana que viene?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L016",
+      "justificacion": "WARM (58). Gerente con poder de decisión en una logística, que es sector objetivo, y compra en 1–3 meses. Le restan el tamaño (40 empleados), el presupuesto bajo (9.000 €) y un engagement escaso.",
+      "accion": "Llamada directa para confirmar el presupuesto y ofrecer el plan para pymes.",
+      "canal": "Llamada",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Decide él y el plazo es corto"],
+      "riesgos": ["Poco engagement: puede no estar comparando opciones de verdad"],
+      "correo": {
+        "asunto": "Tomás, {producto} a medida de una distribuidora",
+        "cuerpo": "Hola, Tomás:\n\nGracias por conectar en LinkedIn. Para distribuidoras como la vuestra tenemos un plan que se pone en marcha en pocas semanas y cabe en presupuestos ajustados. ¿Te llamo 15 minutos esta semana y te cuento si encaja con lo que buscáis?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L008",
+      "justificacion": "WARM (57). Logística, sector objetivo, de 60 empleados. Su interlocutor es influenciador (jefe de flota), compra en 3–6 meses, tiene 12.000 € de presupuesto y no ha pedido demo.",
+      "accion": "Nurturing con un caso de éxito de transporte y llamada de seguimiento en dos semanas.",
+      "canal": "Email",
+      "prioridad": "P3",
+      "plazo_accion": "2 semanas",
+      "fecha_limite": "2026-12-07",
+      "oportunidades": ["Encaje sectorial claro"],
+      "riesgos": ["El jefe de flota probablemente no firma"],
+      "correo": {
+        "asunto": "Diego, cómo otra empresa de transporte organizó su flota comercial",
+        "cuerpo": "Hola, Diego:\n\nTe comparto un caso breve de una empresa de transporte que organizó su seguimiento comercial y de clientes con {producto}. Si te resulta útil, puedo enseñároslo a ti y a gerencia en una llamada corta.\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L014",
+      "justificacion": "WARM (54). Tiene buen tamaño (110 empleados) y engagement aceptable, pero el sector es secundario (energía), el interlocutor no decide, compra en 3–6 meses y lleva 53 días sin contacto (−5 puntos).",
+      "accion": "Reactivarlo con contenido del sector energía y pedir referencia de quien decide.",
+      "canal": "Email",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Sector renovables en crecimiento"],
+      "riesgos": ["Se está enfriando: casi dos meses sin contacto"],
+      "correo": {
+        "asunto": "Miguel Ángel, ¿seguimos hablando de vuestro CRM?",
+        "cuerpo": "Hola, Miguel Ángel:\n\nHace unas semanas te interesaste por {producto}. Te dejo un resumen de cómo lo usan empresas de energía para gestionar instaladores y proyectos. Si el tema sigue abierto, ¿me indicas quién más debería participar y buscamos 20 minutos?\n\nUn saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L012",
+      "justificacion": "WARM bajo (52). El encaje es bueno (Director General, industria), pero no compra hasta dentro de más de 6 meses y lleva 64 días sin contacto. Tiene presupuesto aprobado para 2027.",
+      "accion": "Nurturing trimestral y recordatorio para reactivarlo en febrero de 2027.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": ["El presupuesto de 2027 ya está aprobado"],
+      "riesgos": ["Mucho tiempo hasta la compra: puede elegir a un competidor"],
+      "correo": {
+        "asunto": "Andrés, preparando el proyecto CRM de 2027",
+        "cuerpo": "Estimado Andrés:\n\nSé que su proyecto está previsto para 2027. Para que llegue con todo preparado, le comparto una guía para planificar la implantación de un CRM en empresas industriales. Le escribiré a principios de año por si quiere que la revisemos juntos.\n\nUn cordial saludo,\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L020",
+      "justificacion": "COLD (28). Es un bar de 6 empleados con 800 € de presupuesto y sin plazo definido. Aunque habla con el propietario, no encaja con el producto.",
+      "accion": "Incluir en el nurturing automático para microempresas.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": ["El coste de venta supera el valor del cliente"],
+      "correo": {
+        "asunto": "Hugo, ideas para fidelizar clientes en hostelería",
+        "cuerpo": "Hola, Hugo:\n\nGracias por visitar nuestra web. Te dejo una guía gratuita con ideas sencillas para fidelizar clientes en hostelería. Si en algún momento necesitas una herramienta más completa, aquí estaremos.\n\nSi no quieres recibir más correos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L022",
+      "justificacion": "COLD (23). Profesor de un colegio, sin presupuesto ni plazo de compra y en un sector fuera de objetivo. Él mismo dice que asistió al webinar por curiosidad.",
+      "accion": "Nurturing educativo. No asignar comercial.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": [],
+      "correo": {
+        "asunto": "Iván, materiales del webinar",
+        "cuerpo": "Hola, Iván:\n\nGracias por asistir al webinar. Aquí tienes la grabación y la presentación por si quieres repasarlas.\n\nSi no quieres recibir más correos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L018",
+      "justificacion": "COLD (22). Diseñador autónomo con email genérico, 500 € de presupuesto y compra a más de 6 meses. No es el perfil de cliente.",
+      "accion": "Nurturing automático. Valorar recomendarle una herramienta más ligera.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": [],
+      "correo": {
+        "asunto": "Óscar, recursos para organizar tus clientes",
+        "cuerpo": "Hola, Óscar:\n\nGracias por tu interés. Te dejo una plantilla gratuita para llevar el seguimiento de clientes y presupuestos. Esperamos que te sea útil.\n\nSi no quieres recibir más correos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L023",
+      "justificacion": "COLD (21). Floristería de 3 empleados, con 600 € de presupuesto y 312 días sin contacto (−15 puntos).",
+      "accion": "Enviar un correo de reactivación y, si no responde, archivar.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": ["Puede que el contacto ya no esté activo"],
+      "correo": {
+        "asunto": "Beatriz, ¿te seguimos escribiendo?",
+        "cuerpo": "Hola, Beatriz:\n\nHace tiempo que no hablamos. Si te sigue interesando recibir ideas para gestionar clientes en tu tienda, no tienes que hacer nada. Si prefieres que dejemos de escribirte, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L019",
+      "justificacion": "COLD (20). Es administración pública (sector fuera de objetivo), con 3.000 € de presupuesto, compra a más de 6 meses, necesidad de licitación y 267 días sin contacto.",
+      "accion": "Vigilar las licitaciones públicas. No hacer seguimiento comercial activo.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": ["Podría salir una licitación más adelante"],
+      "riesgos": ["Proceso de licitación largo y con mucha burocracia"],
+      "correo": {
+        "asunto": "Cristina, información para futuros pliegos",
+        "cuerpo": "Hola, Cristina:\n\nNos conocimos en la feria. Por si en el futuro preparáis un pliego para un CRM, te dejo nuestra ficha técnica y las certificaciones de seguridad.\n\nSi no quieres recibir más correos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L024",
+      "justificacion": "COLD (19). Taller de 12 empleados, sin plazo de compra, con 2.500 € de presupuesto y 197 días sin contacto. El sector encaja, pero el tamaño y la intención no.",
+      "accion": "Nurturing automático.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": [],
+      "correo": {
+        "asunto": "Sergio, cómo organizar las citas y los clientes del taller",
+        "cuerpo": "Hola, Sergio:\n\nTe dejo una guía corta para organizar citas y recordatorios a clientes en talleres. Esperamos que te ayude.\n\nSi no quieres recibir más correos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L021",
+      "justificacion": "COLD (17). Estudio de arquitectura de 4 personas, con 2.000 € de presupuesto, compra a más de 6 meses y 114 días sin contacto.",
+      "accion": "Nurturing automático.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": [],
+      "correo": {
+        "asunto": "Rocío, plantilla de seguimiento de proyectos y clientes",
+        "cuerpo": "Hola, Rocío:\n\nTe compartimos una plantilla gratuita para hacer seguimiento de propuestas y clientes en estudios pequeños.\n\nSi no quieres recibir más correos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L017",
+      "justificacion": "COLD (1), la puntuación más baja. Academia de 8 empleados, interlocutora administrativa, sin presupuesto ni plazo y 235 días sin contacto.",
+      "accion": "Archivar tras un último correo de reactivación.",
+      "canal": "Nurturing",
+      "prioridad": "P4",
+      "plazo_accion": "1 mes",
+      "fecha_limite": "2026-12-23",
+      "oportunidades": [],
+      "riesgos": [],
+      "correo": {
+        "asunto": "Nuria, ¿seguimos en contacto?",
+        "cuerpo": "Hola, Nuria:\n\nHace tiempo que no hablamos. Si quieres seguir recibiendo recursos sobre gestión de alumnos y clientes, no tienes que hacer nada. Si prefieres dejar de recibirlos, responde «baja».\n\n{firma}"
+      }
+    },
+    {
+      "id_lead": "L026",
+      "justificacion": "Está en REVISAR DATOS porque el email tiene un error de formato (doble @), pero con el dato corregido sería HOT (87). Es una directora de ventas de retail con compra inmediata, 35.000 € de presupuesto, demo solicitada y llegada por referido.",
+      "accion": "Llamar hoy al teléfono de la ficha, confirmar el email correcto (probablemente veronica.paz@innovaretail.es) y agendar la demo en la misma llamada.",
+      "canal": "Llamada",
+      "prioridad": "P1",
+      "plazo_accion": "24 h",
+      "fecha_limite": "2026-11-24",
+      "oportunidades": ["Es un HOT oculto: compra inmediata y referido", "Se puede sumar a la demo de retail"],
+      "riesgos": ["No ha abierto ningún email porque no le llegan: puede pensar que no le hemos respondido"],
+      "correo": null
+    },
+    {
+      "id_lead": "L025",
+      "justificacion": "Está en REVISAR DATOS porque no tiene email (dejó la tarjeta en la feria sin él). Con el dato completo sería HOT (70): Director General, compra en 1–3 meses, 20.000 € de presupuesto y demo solicitada.",
+      "accion": "Llamar al teléfono de la ficha, pedir el email y agendar la demo.",
+      "canal": "Llamada",
+      "prioridad": "P1",
+      "plazo_accion": "48 h",
+      "fecha_limite": "2026-11-25",
+      "oportunidades": ["Decisor con urgencia a corto plazo"],
+      "riesgos": ["Construcción es un sector secundario", "Sin email no se le pueden enviar materiales"],
+      "correo": null
+    },
+    {
+      "id_lead": "L027",
+      "justificacion": "Está en REVISAR DATOS por un número de empleados imposible (−20). Su puntuación provisional es WARM (60): decisor de compras en industria con 50.000 € de presupuesto, aunque ahora el tamaño puntúa 0.",
+      "accion": "Corregir los empleados con fuentes públicas (web o LinkedIn de la empresa) y volver a puntuar. Con más de 100 empleados podría pasar a HOT.",
+      "canal": "Revisión interna",
+      "prioridad": "P2",
+      "plazo_accion": "48 h",
+      "fecha_limite": "2026-11-25",
+      "oportunidades": ["Presupuesto alto (50.000 €): puede ser HOT al corregir el dato"],
+      "riesgos": ["Error de importación: revisar si otros campos también están mal"],
+      "correo": null
+    },
+    {
+      "id_lead": "L029",
+      "justificacion": "Está en REVISAR DATOS porque es un duplicado de L005 (mismo email). El nuevo registro declara 5.000 € de presupuesto y 3–6 meses de plazo, mientras que L005 declara 35.000 € y compra inmediata.",
+      "accion": "Fusionar con L005 en el CRM y aclarar el presupuesto real en la demo técnica de L005.",
+      "canal": "Revisión interna",
+      "prioridad": "P2",
+      "plazo_accion": "24 h",
+      "fecha_limite": "2026-11-24",
+      "oportunidades": [],
+      "riesgos": ["Si el presupuesto real es 5.000 €, la oportunidad L005 está sobrevalorada"],
+      "correo": null
+    },
+    {
+      "id_lead": "L028",
+      "justificacion": "Está en REVISAR DATOS por dos incoherencias: presupuesto negativo (−5.000 €) y último contacto anterior a la fecha de alta. La puntuación provisional sería WARM (47), con gerente decisor y compra en 1–3 meses.",
+      "accion": "Revisar el origen del registro, corregir el presupuesto y las fechas y volver a puntuar.",
+      "canal": "Revisión interna",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Decisor con plazo corto"],
+      "riesgos": ["Puede tratarse de un error de carga masiva que afecte a más registros"],
+      "correo": null
+    },
+    {
+      "id_lead": "L030",
+      "justificacion": "Es el registro con más problemas: le falta el presupuesto, tiene el último contacto en una fecha futura (2027-01-10), un teléfono sospechoso, no tiene cargo ni plazo y pidió demo sin ninguna visita web. Con estos datos la puntuación provisional es COLD (37), así que no es fiable.",
+      "accion": "Contactar por email para completar la ficha (cargo, presupuesto, plazo) antes de invertir tiempo comercial.",
+      "canal": "Revisión interna",
+      "prioridad": "P3",
+      "plazo_accion": "1 semana",
+      "fecha_limite": "2026-11-30",
+      "oportunidades": ["Sector objetivo (logística) y demo solicitada"],
+      "riesgos": ["Posible registro falso o de prueba"],
+      "correo": null
+    }
+  ]
+}

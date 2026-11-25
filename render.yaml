@@ -1,0 +1,35 @@
+# Despliegue en Render (Blueprint): Render → New → Blueprint → elige este repositorio.
+# Crea la base de datos PostgreSQL gestionada y el servicio web con HTTPS automático.
+databases:
+  - name: crm-db
+    databaseName: crm
+    user: crm_app
+    region: frankfurt
+    plan: free          # para uso real cámbialo a un plan de pago (el gratuito caduca)
+
+services:
+  - type: web
+    name: crm-leads
+    runtime: python
+    region: frankfurt
+    plan: free          # el plan gratuito se duerme tras un rato sin visitas
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app --workers 2 --threads 4 --timeout 180 --bind 0.0.0.0:$PORT
+    healthCheckPath: /salud
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: DATABASE_URL
+        fromDatabase:
+          name: crm-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true      # Render genera una clave aleatoria; no está en el código
+      - key: PRODUCCION
+        value: "true"            # cookies solo por HTTPS y cabecera HSTS
+      - key: ALLOW_SIGNUP
+        value: "true"            # pon "false" para cerrar el registro público
+      - key: ANTHROPIC_API_KEY
+        sync: false              # Render te la pedirá al crear el servicio (déjala vacía si aún no la tienes)
+      - key: LIMITE_IA_DIARIO
+        value: "60"
